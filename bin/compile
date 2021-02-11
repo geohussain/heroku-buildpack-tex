@@ -71,7 +71,9 @@ fi
 build-step "Updating TeX Live..."
 
 tlmgr option repository "$TEXLIVE_REPOSITORY"
-#tlmgr update --self
+wget $TEXLIVE_REPOSITORY/update-tlmgr-latest.sh
+bash update-tlmgr-latest.sh
+tlmgr update --self
 
 # install user-provided-packages
 if [ -f "$BUILD_DIR/texlive.packages" ]; then
@@ -81,7 +83,7 @@ if [ -f "$BUILD_DIR/texlive.packages" ]; then
 fi
 
 #build-step "Updating installed packages..."
-#tlmgr update --all
+tlmgr update --all
 
 build-step "Cleaning up temporary files..."
 # Make sure the cache is empty
